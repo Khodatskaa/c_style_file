@@ -51,6 +51,7 @@ int main()
         lineCount++;
     }
 
+    /*%d is a format specifier for integers*/
     fprintf(outputFile, "\nNumber of characters: %d\n", charCount);
     fprintf(outputFile, "Number of lines: %d\n", lineCount);
     fprintf(outputFile, "Number of vowels: %d\n", vowelCount);
