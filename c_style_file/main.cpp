@@ -8,6 +8,7 @@ int compareLines(const char* line1, const char* line2)
     {
         if (*line1 != *line2) 
         {
+            /*static_cast<int> is used to convert individual characters to integers*/
             return static_cast<int>(*line1) - static_cast<int>(*line2);
         }
         line1++;
