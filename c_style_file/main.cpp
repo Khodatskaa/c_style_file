@@ -62,7 +62,7 @@ int main()
     fclose(inputFile);
     fclose(outputFile);
 
-    /*%s is a format specifier*/
+    /*%s is a format specifier for a string*/
     printf("File encrypted using Caesar cipher and written to %s\n", OutputPath);
 
     return 0;
