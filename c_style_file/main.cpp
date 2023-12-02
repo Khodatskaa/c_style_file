@@ -2,7 +2,21 @@
 #include <iostream>
 using namespace std;
 
-int main()
+int compareLines(const char* line1, const char* line2)
+{
+    while (*line1 != '\0' && *line2 != '\0') 
+    {
+        if (*line1 != *line2) 
+        {
+            return static_cast<int>(*line1) - static_cast<int>(*line2);
+        }
+        line1++;
+        line2++;
+    }
+    return static_cast<int>(*line1) - static_cast<int>(*line2);
+}
+
+int main() 
 {
     const char* File1Path = "file1.txt";
     const char* File2Path = "file2.txt";
@@ -20,19 +34,25 @@ int main()
     char line2[1000];
     int lineNumber = 0;
 
-    while (fgets(line1, sizeof(line1), File1) != nullptr && fgets(line2, sizeof(line2), File2) != nullptr)
+    while (fgets(line1, sizeof(line1), File1) != nullptr && fgets(line2, sizeof(line2), File2) != nullptr) 
     {
         lineNumber++;
 
         size_t len1 = strlen(line1);
         if (len1 > 0 && line1[len1 - 1] == '\n')
+        {
             line1[len1 - 1] = '\0';
+        }
 
         size_t len2 = strlen(line2);
         if (len2 > 0 && line2[len2 - 1] == '\n')
+        {
             line2[len2 - 1] = '\0';
+        }
 
-        if (strcmp(line1, line2) != 0)
+        int comparisonResult = compareLines(line1, line2);
+
+        if (comparisonResult != 0) 
         {
             cout << "Mismatch at line: " << lineNumber << "\n";
             cout << "File1: " << line1 << "\n";
