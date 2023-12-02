@@ -52,7 +52,7 @@ int main()
 
     if (foundLineWithoutSpace)
     {
-        for (int i = 0; i < 12; ++i)
+        for (int i = 0; i < 1; ++i)
         {
             fputs("\n-------------\n", OutputFile);
         }
