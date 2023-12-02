@@ -1,12 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 
-void encryptCaesarCipher(const char* inputPath, const char* outputPath, int shift)
+
+void encryptCaesarCipher(const char* inputPath, const char* outputPath, int shift) 
 {
     FILE* inputFile = fopen(inputPath, "r");
     FILE* outputFile = fopen(outputPath, "w");
 
-    if (inputFile == NULL || outputFile == NULL) 
+    if (inputFile == NULL || outputFile == NULL)
     {
         perror("Error opening files");
         return;
@@ -38,7 +39,7 @@ int main()
     FILE* inputFile = fopen(InputPath, "r");
     FILE* outputFile = fopen(OutputPath, "w");
 
-    if (inputFile == NULL || outputFile == NULL)
+    if (inputFile == NULL || outputFile == NULL) 
     {
         perror("Error opening files");
         return 1;
@@ -46,9 +47,10 @@ int main()
 
     int currentChar;
 
-    while ((currentChar = fgetc(inputFile)) != EOF) 
+    /*EOF = End Of File*/
+    while ((currentChar = fgetc(inputFile)) != EOF)
     {
-        if (isalpha(currentChar)) 
+        if (isalpha(currentChar))
         {
             char baseChar = isupper(currentChar) ? 'A' : 'a';
             currentChar = ((currentChar - baseChar + shift) % 26 + 26) % 26 + baseChar;
@@ -60,6 +62,7 @@ int main()
     fclose(inputFile);
     fclose(outputFile);
 
+    /*%s is a format specifier*/
     printf("File encrypted using Caesar cipher and written to %s\n", OutputPath);
 
     return 0;
