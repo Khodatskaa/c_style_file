@@ -1,66 +1,38 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-using namespace std;
 
 int main()
 {
-    char inputPath[] = "test.txt";
-    char outputPath[] = "output.txt";
+    const char* InputPath = "test.txt";
+    const char* OutputPath = "output.txt";
 
-    FILE* inputFile;
-    FILE* outputFile;
+    FILE* InputFile;
+    FILE* OutputFile;
 
-    inputFile = fopen(inputPath, "r");
-    outputFile = fopen(outputPath, "w");
+    InputFile = fopen(InputPath, "r");
+    OutputFile = fopen(OutputPath, "w");
 
-    if (inputFile == NULL || outputFile == NULL)
+    if (InputFile == nullptr || OutputFile == nullptr)
     {
-        perror("Error opening file");
+        perror("Error");
         return 1;
     }
 
-    char buffer[100];
     char word[100];
+    int wordLength = 0;
 
-    while (fgets(buffer, 100, inputFile) != NULL)
+    while (fscanf(InputFile, "%99s", word) == 1)
     {
-        int i = 0;
-        int bufferLength = strlen(buffer);
-
-        while (i < bufferLength)
+        if (wordLength >= 7)
         {
-            while (i < bufferLength && !isalpha(buffer[i]))
-            {
-                i++;
-            }
-
-            int wordStart = i;
-            while (i < bufferLength && isalpha(buffer[i]))
-            {
-                i++;
-            }
-
-            int wordLength = i - wordStart;
-
-            if (wordLength >= 7)
-            {
-                int j;
-                for (j = 0; j < wordLength; j++)
-                {
-                    word[j] = buffer[wordStart + j];
-                }
-                word[j] = '\0';
-
-                fputs(word, outputFile);
-                fputs(" ", outputFile);
-            }
+            fprintf(OutputFile, "%s\n", word);
         }
+
+        wordLength = 0;
     }
 
-    fclose(inputFile);
-    fclose(outputFile);
-
-    cout << "Words have been written to output.txt" << endl;
+    fclose(InputFile);
+    fclose(OutputFile);
 
     return 0;
 }
